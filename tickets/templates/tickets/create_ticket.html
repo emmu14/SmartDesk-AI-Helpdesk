@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Support Ticket | SmartDesk</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            color: #1f2937;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 18px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Create Support Ticket</h1>
+    <p>Describe your issue and our support team will assist you.</p>
+    <div id="ai-result" style="display:none; background:#eff6ff;
+    padding:15px; border-radius:8px; margin-bottom:20px;">
+
+      <h3>AI Category Suggestion</h3>
+
+      <p>Predicted Category: <strong id="ai-category"></strong></p>
+
+      <p>Confidence: <strong id="ai-confidence"></strong>%</p>
+
+      <button type="button" id="apply-ai-category">
+           Apply AI Suggestion
+      </button>
+
+</div>  
+
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Submit Ticket</button>
+    </form>
+
+</div>
+
+
+<script>
+const descriptionField = document.getElementById('id_description');
+
+descriptionField.addEventListener('blur', async function() {
+
+    const description = this.value.trim();
+
+    if (description.length < 10) {
+        return;
+    }
+
+    const url = "{% url 'tickets:predict_category' %}?description="
+                + encodeURIComponent(description);
+
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Prediction request failed");
+        }
+
+        const data = await response.json();
+        predictedCategory = data.category;
+
+        document.getElementById('ai-category').textContent = data.category;
+        document.getElementById('ai-confidence').textContent = data.confidence;
+
+        document.getElementById('ai-result').style.display = 'block';
+
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+let predictedCategory = null;
+
+document.getElementById('apply-ai-category')
+.addEventListener('click', function() {
+
+    if (!predictedCategory) {
+        return;
+    }
+
+    const categoryField = document.getElementById('id_category');
+
+    for (let option of categoryField.options) {
+        if (option.text.trim().toLowerCase() ===
+            predictedCategory.toLowerCase()) {
+            categoryField.value = option.value;
+            break;
+        }
+    }
+
+});
+
+</script>
+
+
+</body>
+</html>

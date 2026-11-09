@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Agent Dashboard | SmartDesk</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            margin: 0;
+            padding: 30px;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .card, .ticket-section {
+            background: white;
+            padding: 22px;
+            border-radius: 10px;
+        }
+
+        .card h2 {
+            font-size: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #f9fafb;
+        }
+
+        @media(max-width: 700px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .ticket-section {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    
+<header>
+    <div>
+        <h1>SmartDesk Agent</h1>
+        <p>Welcome, {{ request.user.username }}</p>
+    </div>
+
+    <div class="header-actions">
+
+        <a href="{% url 'notifications:list' %}">
+            Notifications
+        </a>
+
+        <form method="POST" action="{% url 'accounts:logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+
+    </div>
+</header>
+
+
+    <section class="cards">
+
+        <div class="card">
+            <h3>Total Tickets</h3>
+            <h2>{{ total_tickets }}</h2>
+        </div>
+
+        <div class="card">
+            <h3>Pending</h3>
+            <h2>{{ pending_tickets }}</h2>
+        </div>
+
+        <div class="card">
+            <h3>In Progress</h3>
+            <h2>{{ in_progress_tickets }}</h2>
+        </div>
+
+        <div class="card">
+            <h3>Resolved</h3>
+            <h2>{{ resolved_tickets }}</h2>
+        </div>
+
+    </section>
+
+    <section class="ticket-section">
+
+        <h2>My Assigned Tickets</h2>
+
+        {% if tickets %}
+
+        ```html
+<table>
+    <thead>
+        <tr>
+            <th>Ticket</th>
+            <th>Employee</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Action</th>
+            <th>Discussion</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for ticket in tickets %}
+        <tr>
+            <td>{{ ticket.title }}</td>
+            <td>{{ ticket.requester.username }}</td>
+            <td>{{ ticket.get_priority_display }}</td>
+            <td>{{ ticket.get_status_display }}</td>
+            <td>{{ ticket.created_at|date:"d M Y" }}</td>
+
+            <td>
+                <a href="{% url 'tickets:update_status' ticket.id %}">
+                    Update Status
+                </a>
+            </td>
+
+            <td>
+                <a href="{% url 'tickets:comments' ticket.id %}">
+                    View Discussion
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+```
+
+        {% else %}
+
+        <p>No tickets have been assigned to you yet.</p>
+
+        {% endif %}
+
+    </section>
+
+</div>
+
+</body>
+</html>

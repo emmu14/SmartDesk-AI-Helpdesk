@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket History | SmartDesk</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .history-item {
+            border-left: 3px solid #2563eb;
+            padding: 12px 20px;
+            margin: 20px 0;
+            background: #f9fafb;
+        }
+
+        .date {
+            color: #6b7280;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Ticket Activity History</h1>
+
+    <h3>{{ ticket.title }}</h3>
+
+    {% for item in history %}
+
+        <div class="history-item">
+
+            <strong>{{ item.action }}</strong>
+
+            <p>{{ item.details }}</p>
+
+            <p>
+                By:
+                {% if item.user %}
+                    {{ item.user.username }}
+                {% else %}
+                    System or deleted user
+                {% endif %}
+            </p>
+
+            <span class="date">
+                {{ item.created_at|date:"d M Y, h:i A" }}
+            </span>
+
+        </div>
+
+    {% empty %}
+
+        <p>No activity recorded yet.</p>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

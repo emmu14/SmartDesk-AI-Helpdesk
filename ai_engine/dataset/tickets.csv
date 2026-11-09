@@ -1,0 +1,102 @@
+
+description,category
+Laptop screen is broken,Hardware
+Keyboard is not working,Hardware
+Mouse is not responding,Hardware
+Computer is not starting,Hardware
+Printer is not printing,Hardware
+Laptop battery is draining quickly,Hardware
+Monitor displays a black screen,Hardware
+USB port is not detecting devices,Hardware
+Computer overheats frequently,Hardware
+Laptop speaker has no sound,Hardware
+My keyboard keys are stuck,Hardware
+Desktop power button is not working,Hardware
+Application is crashing,Software
+Software installation failed,Software
+Program is running slowly,Software
+Unable to open application,Software
+Application shows an error,Software
+Excel is freezing,Software
+Browser keeps closing unexpectedly,Software
+Unable to update the application,Software
+Software license activation failed,Software
+The application screen is blank,Software
+Program stops responding,Software
+Application features are not working,Software
+Internet is disconnected,Network
+WiFi connection is unstable,Network
+Network is very slow,Network
+Cannot access company server,Network
+Router is not working,Network
+VPN connection keeps dropping,Network
+Unable to connect to office WiFi,Network
+Network cable is damaged,Network
+DNS server is not responding,Network
+Internet connection disconnects frequently,Network
+Shared network drive is unavailable,Network
+Unable to access internal website,Network
+Forgot my password,Account Access
+Unable to login to account,Account Access
+Account is locked,Account Access
+Password reset is not working,Account Access
+Login authentication failed,Account Access
+Unable to access employee account,Account Access
+My account is disabled,Account Access
+Two factor authentication is not working,Account Access
+I cannot sign in to the portal,Account Access
+Password expired and cannot login,Account Access
+Account verification failed,Account Access
+Unable to reset my login credentials,Account Access
+Laptop battery drains very quickly,Hardware
+My computer fan is making noise,Hardware
+The monitor is flickering,Hardware
+Laptop charging port is damaged,Hardware
+My desktop keyboard stopped responding,Hardware
+The application crashes whenever I open it,Software
+Payroll software is showing incorrect results,Software
+The company application freezes frequently,Software
+I cannot install the required software,Software
+The software update failed,Software
+Office WiFi keeps disconnecting,Network
+Internet connection is unavailable in my office,Network
+The company network is extremely slow,Network
+VPN is not connecting to the office network,Network
+I cannot access the shared network folder,Network
+My employee login password has expired,Account Access
+The portal says my account is locked,Account Access
+I cannot reset my employee password,Account Access
+My authentication code is not accepted,Account Access
+The employee portal rejects my login,Account Access
+My laptop screen is flickering continuously,Hardware
+The keyboard keys are not responding,Hardware
+My desktop computer is overheating,Hardware
+The monitor displays no signal,Hardware
+My laptop charger is damaged,Hardware
+The printer is not printing documents,Hardware
+My computer is making unusual fan noise,Hardware
+The mouse is disconnecting frequently,Hardware
+Microsoft Excel crashes when opening a workbook,Software
+The HR application shows an unexpected error,Software
+I cannot save changes in the company application,Software
+The payroll system freezes during processing,Software
+The accounting application is running very slowly,Software
+The company software update failed,Software
+The application closes whenever I click submit,Software
+The reporting tool is displaying incorrect results,Software
+The office internet connection keeps disconnecting,Network
+Employees cannot access the shared network drive,Network
+The company VPN connection is failing,Network
+The office WiFi signal is extremely weak,Network
+Network printers are unavailable to all employees,Network
+The server cannot connect to the internal network,Network
+Websites are not loading on the office network,Network
+The network connection is very slow today,Network
+My employee account has been locked,Account Access
+I cannot log in to the company portal,Account Access
+My two-factor authentication code is not working,Account Access
+I need access to the finance department system,Account Access
+My company account password reset is failing,Account Access
+I cannot access my employee dashboard,Account Access
+My account login keeps getting rejected,Account Access
+I need permission to access a restricted folder,Account Access

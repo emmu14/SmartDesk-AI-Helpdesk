@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Notifications</title>
+</head>
+<body>
+     <h2>Unread Notifications: {{ unread_count }}</h2>
+    <h1>My Notifications</h1>
+{% for notification in notifications %}
+
+    <div class="{% if notification.is_read %}read{% else %}unread{% endif %}">
+
+        <p>{{ notification.message }}</p>
+
+        <small>{{ notification.created_at }}</small>
+
+        {% if not notification.is_read %}
+
+            <form method="POST"
+                  action="{% url 'notifications:mark_as_read' notification.id %}">
+
+                {% csrf_token %}
+
+                <button type="submit">Mark as Read</button>
+
+            </form>
+
+        {% else %}
+
+            <p>Already Read</p>
+
+        {% endif %}
+
+    </div>
+
+    <hr>
+
+{% empty %}
+
+    <p>No notifications available.</p>
+
+{% endfor %}
+
+</body>
+</html>

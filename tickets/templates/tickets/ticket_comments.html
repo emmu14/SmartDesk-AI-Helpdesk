@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ticket Discussion | SmartDesk</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .comment {
+            background: #f3f4f6;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            margin: 10px 0;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Ticket Discussion</h1>
+
+    <h3>{{ ticket.title }}</h3>
+
+    <p>{{ ticket.description }}</p>
+
+    <hr>
+
+    <h2>Conversation</h2>
+
+    {% for comment in comments %}
+
+        <div class="comment">
+
+            <strong>{{ comment.author.username }}</strong>
+
+            <small>
+                {{ comment.created_at|date:"d M Y, h:i A" }}
+            </small>
+
+            <p>{{ comment.message }}</p>
+
+        </div>
+
+    {% empty %}
+
+        <p>No comments yet. Start the conversation!</p>
+
+    {% endfor %}
+
+    <hr>
+
+    <h2>Add a Comment</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Send Comment</button>
+    </form>
+
+</div>
+
+</body>
+</html>
